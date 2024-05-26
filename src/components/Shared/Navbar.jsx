@@ -1,22 +1,33 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
-    console.log(user?.photoURL)
-
-    const { signInWithGoogle } = useContext(AuthContext);
+    const { user, logOut, signInWithGoogle } = useContext(AuthContext);
 
     const handleGoogleLogin = () => {
         signInWithGoogle()
             .then(result => {
-                console.log('User signed in:', result.user);
-                // Handle successful login if needed
+                // console.log('User signed in:', result.user);
+
+                if (result.user) {
+                    axios.post('http://localhost:5000/users', {
+                        email: result.user.email,
+                        displayName: result.user.displayName,
+                        photoURL: result.user.photoURL,
+                        coin: 50
+                    })
+                        .then(response => {
+                            console.log('User data posted successfully:', response.data);
+                        })
+                        .catch(error => {
+                            console.error('Error posting user data:', error);
+                        });
+                }
             })
             .catch(error => {
                 console.error('Error during Google sign-in:', error);
-                // Handle login error if needed
             });
     };
 
@@ -31,7 +42,6 @@ const Navbar = () => {
                 // Handle logout error if needed
             });
     };
-
     const navLinksLoggedOut = <>
         <li className=""><NavLink to="/">Home</NavLink></li>
         <li className=""><NavLink to="/recipes">Recipes</NavLink></li>
@@ -56,11 +66,11 @@ const Navbar = () => {
                     <label tabIndex={0} className="lg:hidden">
                         {
                             user ?
-                            <> <img src={user?.photoURL} alt="User" className="w-8 h-8 rounded-full" /></> :
+                                <> <img src={user?.photoURL} alt="User" className="w-8 h-8 rounded-full" /></> :
                                 <><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                                </svg></> 
-                                
+                                </svg></>
+
                         }
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
