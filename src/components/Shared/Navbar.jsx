@@ -44,22 +44,20 @@ const Navbar = () => {
     };
     const navLinksLoggedOut = <>
         <li className=""><NavLink to="/">Home</NavLink></li>
-        <li className=""><NavLink to="/recipes">Recipes</NavLink></li>
         <li className=""><button onClick={handleGoogleLogin}>Google Login</button></li>
     </>;
 
     const navLinksLoggedIn = <>
         <li className=""><NavLink to="/">Home</NavLink></li>
-        <li className=""><NavLink to="/recipes">Recipes</NavLink></li>
-        <li className=""><NavLink to="/add-recipes">Add Recipes</NavLink></li>
-        <li className=""><NavLink to="/coins">Coins</NavLink></li>
+        <li className=""><NavLink to="/add-recipes">Temperature History</NavLink></li>
+        <li className=""><NavLink to="/coins">Runtime</NavLink></li>
         <li className=""><button onClick={handleLogout}>Logout</button></li>
     </>;
 
     return (
         <div className="navbar bg-my-pink rounded-b-lg text-my-blue">
             <div className="navbar-start">
-                <Link className="normal-case text-base md:text-3xl font-bold">Recipe Master</Link>
+                <Link className="normal-case text-base md:text-3xl font-bold">Fertilizer Mixer</Link>
             </div>
             <div className="navbar-end">
                 <div className="dropdown dropdown-end">

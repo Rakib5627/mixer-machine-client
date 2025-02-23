@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Home/Home";
 import Main from "../layouts/Main";
-import Recipes from "../Recipe/Recipes";
-import AddRecipe from "../AddRecipe/AddRecipe";
+import Machine from "../Home/Machine";
+import AddMachine from "../AddMachine/AddMachine";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 
 
@@ -12,18 +13,19 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement : <ErrorPage></ErrorPage>,
     children: [
       {
           path: '/',
           element: <Home></Home>
       }, 
       {
-          path: '/recipes',
-          element: <Recipes></Recipes>
+          path: '/machine01',
+          element: <Machine></Machine>
       }, 
       {
-          path: '/add-recipes',
-          element: <AddRecipe></AddRecipe>
+          path: '/add-machine',
+          element: <AddMachine></AddMachine>
       }, 
     ]
   },

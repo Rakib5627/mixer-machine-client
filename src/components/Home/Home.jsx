@@ -1,10 +1,10 @@
 import Footer from "../Shared/Footer";
-import Banner from "./Banner";
+import AllMachines from "./AllMachines";
 
 const Home = () => {
     return (
         <div>
-            <Banner></Banner>
+            <AllMachines></AllMachines>
             <Footer></Footer>
         </div>
     );
